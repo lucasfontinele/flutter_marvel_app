@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 class HeroCard extends StatelessWidget {
   final String imagePath;
   final String heroName;
-  final String realName;
   final VoidCallback onTap;
 
   const HeroCard({
     super.key,
     required this.imagePath,
     required this.heroName,
-    required this.realName,
     required this.onTap,
   });
 
@@ -79,22 +77,6 @@ class HeroCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      realName,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.white,
-                        fontFamily: "Gilroy-Medium",
-                        shadows: [
-                          Shadow(
-                            offset: const Offset(0, 2),
-                            blurRadius: 4,
-                            color: Colors.black.withOpacity(0.8),
-                          ),
-                        ],
-                      ),
-                    ),
-
                     Text(
                       heroName,
                       style: TextStyle(
