@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_marvel_app/Scenes/Home/home_scene.dart';
+import 'package:flutter_marvel_app/Scenes/Home/home_factory.dart';
 
 void main() {
   runApp(const MainApp());
@@ -12,7 +12,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(fontFamily: "Gilroy"),
-      home: HomeScene()
+      home: HomeFactory.createScreen(),
     );
   }
 }

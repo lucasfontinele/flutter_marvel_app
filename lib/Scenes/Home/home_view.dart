@@ -7,14 +7,14 @@ import 'package:flutter_marvel_app/Repositories/MarvelRepository.dart';
 import 'package:flutter_marvel_app/Scenes/HeroDetail/hero_detail_view.dart';
 import 'package:flutter_marvel_app/Services/MarvelApiService.dart';
 
-class HomeScene extends StatefulWidget {
-  const HomeScene({super.key});
+class HomeView extends StatefulWidget {
+  const HomeView({super.key});
 
   @override
-  _HomeSceneState createState() => _HomeSceneState();
+  _HomeViewState createState() => _HomeViewState();
 }
 
-class _HomeSceneState extends State<HomeScene> {
+class _HomeViewState extends State<HomeView> {
   final MarvelRepository marvelRepository = MarvelRepository(apiService: MarvelApiService());
 
   List<CharacterModel> characters = [];

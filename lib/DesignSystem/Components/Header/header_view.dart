@@ -17,19 +17,19 @@ class CustomHeader extends StatelessWidget {
         color: Colors.white,
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: onMenuPressed,
-          ),
+          // IconButton(
+          //   icon: const Icon(Icons.menu),
+          //   onPressed: onMenuPressed,
+          // ),
 
-          Image.asset("assets/logo.png", height: 70,),
+          Image.asset("assets/logo.png", height: 70,)
 
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: onSearchPressed,
-          ),
+          // IconButton(
+          //   icon: const Icon(Icons.search),
+          //   onPressed: onSearchPressed,
+          // ),
         ],
       ),
     );
