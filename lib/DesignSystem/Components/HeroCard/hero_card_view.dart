@@ -24,6 +24,15 @@ class HeroCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.black,
           borderRadius: BorderRadius.circular(16),
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.black.withOpacity(0.0),
+              Colors.black,
+            ],
+            stops: const [0.4115, 1.0],
+          ),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.2),
@@ -32,12 +41,11 @@ class HeroCard extends StatelessWidget {
             ),
           ],
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              child: Image.network(
+        child: ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(16)),
+          child: Stack(
+            children: [
+              Image.network(
                 imagePath,
                 fit: BoxFit.cover,
                 height: 230,
@@ -64,8 +72,49 @@ class HeroCard extends StatelessWidget {
                   );
                 },
               ),
-            ),
-          ],
+
+              Positioned(
+                bottom: 12,
+                left: 12,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      realName,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.white,
+                        fontFamily: "Gilroy-Medium",
+                        shadows: [
+                          Shadow(
+                            offset: const Offset(0, 2),
+                            blurRadius: 4,
+                            color: Colors.black.withOpacity(0.8),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    Text(
+                      heroName,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        shadows: [
+                          Shadow(
+                            offset: const Offset(0, 2),
+                            blurRadius: 4,
+                            color: Colors.black.withOpacity(0.8),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
