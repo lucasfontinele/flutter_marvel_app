@@ -4,7 +4,8 @@ class CustomHeader extends StatelessWidget {
   final VoidCallback onMenuPressed;
   final VoidCallback onSearchPressed;
 
-  const CustomHeader({super.key, 
+  const CustomHeader({
+    super.key,
     required this.onMenuPressed,
     required this.onSearchPressed,
   });
@@ -16,20 +17,17 @@ class CustomHeader extends StatelessWidget {
       decoration: const BoxDecoration(
         color: Colors.white,
       ),
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // IconButton(
-          //   icon: const Icon(Icons.menu),
-          //   onPressed: onMenuPressed,
-          // ),
-
-          Image.asset("assets/logo.png", height: 70,)
-
-          // IconButton(
-          //   icon: const Icon(Icons.search),
-          //   onPressed: onSearchPressed,
-          // ),
+          Text(
+            'Heroes',
+            style: TextStyle(
+              fontSize: 28,
+              color: Color(0xFFF2264B),
+              fontFamily: 'Gilroy-Heavy',
+            ),
+          ),
         ],
       ),
     );

@@ -26,13 +26,11 @@ class ItemsListView<T> extends StatelessWidget {
           ),
           textAlign: TextAlign.center,
         ),
-
         const SizedBox(height: 16),
-
         SizedBox(
           height: 230,
           child: ListView.builder(
-            scrollDirection: Axis.horizontal,
+            scrollDirection: Axis.vertical,
             itemCount: items.length,
             itemBuilder: (context, index) {
               final item = items[index];
@@ -42,7 +40,7 @@ class ItemsListView<T> extends StatelessWidget {
               );
             },
           ),
-        ),
+        )
       ],
     );
   }

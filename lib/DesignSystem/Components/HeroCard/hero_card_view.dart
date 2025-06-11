@@ -17,7 +17,7 @@ class HeroCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 140,
+        width: double.infinity,
         height: 230,
         decoration: BoxDecoration(
           color: Colors.black,
@@ -46,6 +46,7 @@ class HeroCard extends StatelessWidget {
               Image.network(
                 imagePath,
                 fit: BoxFit.cover,
+                width: double.infinity,
                 height: 230,
                 loadingBuilder: (context, child, loadingProgress) {
                   if (loadingProgress == null) {
@@ -70,7 +71,6 @@ class HeroCard extends StatelessWidget {
                   );
                 },
               ),
-
               Positioned(
                 bottom: 12,
                 left: 12,
