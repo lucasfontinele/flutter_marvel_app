@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_marvel_app/DesignSystem/Components/Header/header_view.dart';
-import 'package:flutter_marvel_app/DesignSystem/Components/HeroCard/hero_card_view.dart';
-import 'package:flutter_marvel_app/DesignSystem/Components/ItemsList/items_list_view.dart';
+import 'package:flutter_marvel_app/Components/Header/header_view.dart';
+import 'package:flutter_marvel_app/Components/HeroCard/hero_card_view.dart';
+import 'package:flutter_marvel_app/Components/ItemsList/items_list_view.dart';
 import 'package:flutter_marvel_app/Models/CharacterModel.dart';
 import 'package:flutter_marvel_app/Repositories/MarvelRepository.dart';
 import 'package:flutter_marvel_app/Scenes/HeroDetail/hero_detail_view.dart';
 import 'package:flutter_marvel_app/Services/MarvelApiService.dart';
-import 'package:flutter_marvel_app/DesignSystem/Components/BottomNavigationBar/bottom_navigation_bar.dart';
+import 'package:flutter_marvel_app/Components/BottomNavigationBar/bottom_navigation_bar.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
