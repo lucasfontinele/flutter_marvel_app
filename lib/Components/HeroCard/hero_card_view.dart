@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class HeroCard extends StatelessWidget {
@@ -17,7 +18,7 @@ class HeroCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: double.infinity,
+        width: 150,
         height: 230,
         decoration: BoxDecoration(
           color: Colors.black,
@@ -43,25 +44,16 @@ class HeroCard extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(16)),
           child: Stack(
             children: [
-              Image.network(
-                imagePath,
+              CachedNetworkImage(
+                imageUrl: imagePath,
                 fit: BoxFit.cover,
                 width: double.infinity,
                 height: 230,
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) {
-                    return child;
-                  }
-                  return Center(
-                    child: CircularProgressIndicator(
-                      value: loadingProgress.expectedTotalBytes != null
-                          ? loadingProgress.cumulativeBytesLoaded /
-                              (loadingProgress.expectedTotalBytes ?? 1)
-                          : null,
-                    ),
-                  );
-                },
-                errorBuilder: (context, error, stackTrace) {
+                placeholder: (context, url) => const Center(
+                  child: CircularProgressIndicator(),
+                ),
+                errorWidget: (context, url, error) {
+                  print('Erro ao carregar imagem para $heroName: $error (URL: $url)');
                   return const Center(
                     child: Icon(
                       Icons.broken_image,
