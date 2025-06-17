@@ -52,8 +52,6 @@ class HomeViewState extends State<HomeView> {
         animeCharacters.addAll((allCharacters?.anime ?? []).cast<HeroModel>());
       });
     } catch (e) {
-      print(e);
-
       setState(() {
         hasError = true;
       });
@@ -129,6 +127,7 @@ class HomeViewState extends State<HomeView> {
                               realName: character.name,
                               imageUrl: character.image,
                               description: character.description,
+                              heroId: character.id,
                             ),
                           ),
                         );
@@ -155,6 +154,7 @@ class HomeViewState extends State<HomeView> {
                               realName: character.name,
                               imageUrl: character.image,
                               description: character.description,
+                              heroId: character.id,
                             ),
                           ),
                         );
@@ -181,6 +181,7 @@ class HomeViewState extends State<HomeView> {
                               realName: character.name,
                               imageUrl: character.image,
                               description: character.description,
+                              heroId: character.id,
                             ),
                           ),
                         );

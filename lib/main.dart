@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_marvel_app/providers/hero_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_marvel_app/scenes/Home/home_factory.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => HeroProvider()),
+      ],
+      child: const MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
