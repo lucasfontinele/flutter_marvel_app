@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_marvel_app/Services/api_service.dart';
+import 'package:flutter_marvel_app/components/BottomNavigationBar/bottom_navigation_bar.dart';
 import 'package:flutter_marvel_app/components/Header/header_view.dart';
 import 'package:flutter_marvel_app/components/HeroCard/hero_card_view.dart';
 import 'package:flutter_marvel_app/components/ItemsList/items_list_view.dart';
 import 'package:flutter_marvel_app/models/hero_model.dart';
 import 'package:flutter_marvel_app/repositories/HeroesRepository.dart';
 import 'package:flutter_marvel_app/scenes/Error/error_factory.dart';
+import 'package:flutter_marvel_app/scenes/Favorites/favorites_factory.dart';
 import 'package:flutter_marvel_app/scenes/HeroDetail/hero_detail_view.dart';
 import 'package:flutter_marvel_app/scenes/Loading/loading_factory.dart';
-import 'package:flutter_marvel_app/Services/api_service.dart';
-import 'package:flutter_marvel_app/components/BottomNavigationBar/bottom_navigation_bar.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -82,7 +83,17 @@ class HomeViewState extends State<HomeView> {
           ),
         ),
       ),
-      bottomNavigationBar: const BottomBar(),
+      bottomNavigationBar: BottomBar(
+        onPressHome: () {},
+        onPressFavorites: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => FavoritesFactory.createScreen(),
+            ),
+          );
+        },
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.only(left: 24, top: 24),
         child: Stack(
