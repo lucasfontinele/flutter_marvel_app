@@ -7,7 +7,7 @@ class ErrorView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Error'),
+        title: const Text('Erro'),
       ),
       body: const Center(
         child: Padding(

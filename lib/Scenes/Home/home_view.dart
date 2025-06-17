@@ -7,7 +7,7 @@ import 'package:flutter_marvel_app/Repositories/HeroesRepository.dart';
 import 'package:flutter_marvel_app/Scenes/Error/error_factory.dart';
 import 'package:flutter_marvel_app/Scenes/HeroDetail/hero_detail_view.dart';
 import 'package:flutter_marvel_app/Scenes/Loading/loading_factory.dart';
-import 'package:flutter_marvel_app/Services/MarvelApiService.dart';
+import 'package:flutter_marvel_app/Services/api_service.dart';
 import 'package:flutter_marvel_app/Components/BottomNavigationBar/bottom_navigation_bar.dart';
 
 class HomeView extends StatefulWidget {
@@ -19,9 +19,11 @@ class HomeView extends StatefulWidget {
 
 class HomeViewState extends State<HomeView> {
   final HeroesRepository heroesRepository =
-      HeroesRepository(apiService: MarvelApiService());
+      HeroesRepository(apiService: ApiService());
 
-  List<CharacterModel> characters = [];
+  List<CharacterModel> marvelCharacters = [];
+  List<CharacterModel> dcCharacters = [];
+  List<CharacterModel> animeCharacters = [];
   bool isLoading = false;
   bool hasError = false;
 
@@ -39,12 +41,17 @@ class HomeViewState extends State<HomeView> {
     });
 
     try {
-      final newCharacters =
+      final allCharacters =
           await heroesRepository.fetchCharacters();
+
       setState(() {
-        characters.addAll(newCharacters);
+        marvelCharacters.addAll((allCharacters?.marvel ?? []).cast<CharacterModel>());
+        dcCharacters.addAll((allCharacters?.dc ?? []).cast<CharacterModel>());
+        animeCharacters.addAll((allCharacters?.anime ?? []).cast<CharacterModel>());
       });
     } catch (e) {
+      print(e);
+
       setState(() {
         hasError = true;
       });
@@ -105,7 +112,7 @@ class HomeViewState extends State<HomeView> {
                     const SizedBox(height: 48),
                     ItemsListView<CharacterModel>(
                       label: "Personagens Marvel",
-                      items: characters,
+                      items: marvelCharacters,
                       itemBuilder: (context, character) {
                         return HeroCard(
                           heroName: character.name,
