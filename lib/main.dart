@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_marvel_app/components/MainTabView/main_tab_view.dart';
 import 'package:flutter_marvel_app/providers/hero_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_marvel_app/scenes/Home/home_factory.dart';
 
 void main() {
   runApp(
@@ -21,7 +21,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(fontFamily: "Gilroy"),
-      home: HomeFactory.createScreen(),
+      home: const MainTabView(),
     );
   }
 }

@@ -30,6 +30,7 @@ class _MainTabViewState extends State<MainTabView> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
+        selectedItemColor: const Color(0xFFF2264B),
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -41,6 +42,7 @@ class _MainTabViewState extends State<MainTabView> {
           ),
         ],
       ),
+      backgroundColor: Colors.white,
     );
   }
 }

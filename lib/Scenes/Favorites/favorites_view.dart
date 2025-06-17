@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_marvel_app/components/BottomNavigationBar/bottom_navigation_bar.dart';
 import 'package:flutter_marvel_app/components/Header/header_view.dart';
 import 'package:flutter_marvel_app/components/HeroCard/hero_card_view.dart';
 import 'package:flutter_marvel_app/providers/hero_provider.dart';
 import 'package:flutter_marvel_app/scenes/HeroDetail/hero_detail_view.dart';
-import 'package:flutter_marvel_app/scenes/Home/home_factory.dart';
 import 'package:provider/provider.dart';
 
 class FavoritesView<T> extends StatelessWidget {
@@ -24,17 +22,6 @@ class FavoritesView<T> extends StatelessWidget {
             onSearchPressed: () {},
           ),
         ),
-      ),
-       bottomNavigationBar: BottomBar(
-        onPressHome: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => HomeFactory.createScreen(),
-            ),
-          );
-        },
-        onPressFavorites: () {},
       ),
       backgroundColor: Colors.white,
       body: Container(
@@ -56,40 +43,53 @@ class FavoritesView<T> extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
 
-                const SizedBox(height: 24),
+                if (items.isEmpty)
+                  const Padding(
+                    padding: EdgeInsets.only(top: 8),
+                    child: Text(
+                      "Você não favoritou nenhum herói ainda",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontFamily: "Gilroy",
+                      ),
+                    ),
+                  )
+                else
+                  const SizedBox(height: 24),
 
-                SizedBox(
-                  height: 230,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: items.length,
-                    itemBuilder: (context, index) {
-                      final item = items[index];
+                  SizedBox(
+                    height: 230,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: items.length,
+                      itemBuilder: (context, index) {
+                        final item = items[index];
 
-                      return Padding(
-                        padding: const EdgeInsets.only(right: 16),
-                        child: HeroCard(
-                          heroName: item.name,
-                          imagePath: item.image,
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => HeroDetailView(
-                                  heroName: item.name,
-                                  realName: item.name,
-                                  imageUrl: item.image,
-                                  description: item.description,
-                                  heroId: item.id,
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 16),
+                          child: HeroCard(
+                            heroName: item.name,
+                            imagePath: item.image,
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => HeroDetailView(
+                                    heroName: item.name,
+                                    realName: item.name,
+                                    imageUrl: item.image,
+                                    description: item.description,
+                                    heroId: item.id,
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
-                      );
-                    },
+                              );
+                            },
+                          ),
+                        );
+                      },
+                    ),
                   ),
-                ),
               ],
             )
           ],
