@@ -5,6 +5,7 @@ import 'package:flutter_marvel_app/Components/ItemsList/items_list_view.dart';
 import 'package:flutter_marvel_app/Models/CharacterModel.dart';
 import 'package:flutter_marvel_app/Repositories/MarvelRepository.dart';
 import 'package:flutter_marvel_app/Scenes/HeroDetail/hero_detail_view.dart';
+import 'package:flutter_marvel_app/Scenes/Loading/loading_factory.dart';
 import 'package:flutter_marvel_app/Services/MarvelApiService.dart';
 import 'package:flutter_marvel_app/Components/BottomNavigationBar/bottom_navigation_bar.dart';
 
@@ -12,10 +13,10 @@ class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
   @override
-  _HomeViewState createState() => _HomeViewState();
+  HomeViewState createState() => HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class HomeViewState extends State<HomeView> {
   final MarvelRepository marvelRepository =
       MarvelRepository(apiService: MarvelApiService());
 
@@ -46,14 +47,18 @@ class _HomeViewState extends State<HomeView> {
     } catch (e) {
       print("Error fetching characters: $e");
     } finally {
-      setState(() {
-        isLoading = false;
-      });
+      // setState(() {
+      //   isLoading = false;
+      // });
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return LoadingFactory.createScreen();
+    }
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -93,7 +98,7 @@ class _HomeViewState extends State<HomeView> {
                     ),
                     const SizedBox(height: 48),
                     ItemsListView<CharacterModel>(
-                      label: "Personagens",
+                      label: "Personagens Marvel",
                       items: characters,
                       itemBuilder: (context, character) {
                         return HeroCard(
