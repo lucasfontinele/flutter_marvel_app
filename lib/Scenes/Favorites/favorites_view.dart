@@ -47,7 +47,7 @@ class FavoritesView<T> extends StatelessWidget {
                   const Padding(
                     padding: EdgeInsets.only(top: 8),
                     child: Text(
-                      "Você não favoritou nenhum herói ainda",
+                      "Você não favoritou nenhum personagem ainda.",
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 18,
