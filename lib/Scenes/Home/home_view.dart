@@ -3,7 +3,8 @@ import 'package:flutter_marvel_app/Components/Header/header_view.dart';
 import 'package:flutter_marvel_app/Components/HeroCard/hero_card_view.dart';
 import 'package:flutter_marvel_app/Components/ItemsList/items_list_view.dart';
 import 'package:flutter_marvel_app/Models/CharacterModel.dart';
-import 'package:flutter_marvel_app/Repositories/MarvelRepository.dart';
+import 'package:flutter_marvel_app/Repositories/HeroesRepository.dart';
+import 'package:flutter_marvel_app/Scenes/Error/error_factory.dart';
 import 'package:flutter_marvel_app/Scenes/HeroDetail/hero_detail_view.dart';
 import 'package:flutter_marvel_app/Scenes/Loading/loading_factory.dart';
 import 'package:flutter_marvel_app/Services/MarvelApiService.dart';
@@ -17,12 +18,12 @@ class HomeView extends StatefulWidget {
 }
 
 class HomeViewState extends State<HomeView> {
-  final MarvelRepository marvelRepository =
-      MarvelRepository(apiService: MarvelApiService());
+  final HeroesRepository heroesRepository =
+      HeroesRepository(apiService: MarvelApiService());
 
   List<CharacterModel> characters = [];
-  int offset = 0;
   bool isLoading = false;
+  bool hasError = false;
 
   @override
   void initState() {
@@ -39,17 +40,18 @@ class HomeViewState extends State<HomeView> {
 
     try {
       final newCharacters =
-          await marvelRepository.fetchCharacters(limit: 20, offset: offset);
+          await heroesRepository.fetchCharacters();
       setState(() {
         characters.addAll(newCharacters);
-        offset += 20; // Atualiza o offset para a próxima página
       });
     } catch (e) {
-      print("Error fetching characters: $e");
+      setState(() {
+        hasError = true;
+      });
     } finally {
-      // setState(() {
-      //   isLoading = false;
-      // });
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
@@ -57,6 +59,10 @@ class HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     if (isLoading) {
       return LoadingFactory.createScreen();
+    }
+
+    if (hasError) {
+      return ErrorFactory.createScreen();
     }
 
     return Scaffold(
@@ -103,7 +109,7 @@ class HomeViewState extends State<HomeView> {
                       itemBuilder: (context, character) {
                         return HeroCard(
                           heroName: character.name,
-                          imagePath: character.thumbnail,
+                          imagePath: character.image,
                           onTap: () {
                             Navigator.push(
                               context,
@@ -111,7 +117,7 @@ class HomeViewState extends State<HomeView> {
                                 builder: (context) => HeroDetailView(
                                   heroName: character.name,
                                   realName: character.name,
-                                  imageUrl: character.thumbnail,
+                                  imageUrl: character.image,
                                   description: character.description,
                                 ),
                               ),

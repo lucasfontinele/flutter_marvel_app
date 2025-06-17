@@ -18,13 +18,6 @@ class BottomBar extends StatelessWidget {
           ),
           IconButton(
             color: Colors.brown,
-            icon: const Icon(Icons.search),
-            onPressed: () {
-              // Ação para o botão Home
-            },
-          ),
-          IconButton(
-            color: Colors.brown,
             icon: const Icon(Icons.favorite),
             onPressed: () {
               // Ação para o botão Search

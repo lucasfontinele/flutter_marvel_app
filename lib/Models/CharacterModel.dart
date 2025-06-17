@@ -1,14 +1,16 @@
 class CharacterModel {
   final int id;
   final String name;
-  final String? description;
-  final String thumbnail;
+  final String description;
+  final String image;
+  final String main_characteristics;
 
   CharacterModel({
     required this.id,
     required this.name,
     required this.description,
-    required this.thumbnail
+    required this.image,
+    required this.main_characteristics,
   });
 
   factory CharacterModel.fromJson(Map<String, dynamic> json) {
@@ -16,7 +18,8 @@ class CharacterModel {
       id: json['id'],
       name: json['name'],
       description: json['description'] ?? '',
-      thumbnail: '${json['thumbnail']['path']}.${json['thumbnail']['extension']}',
+      image: '${json['image']['path']}.${json['image']['extension']}',
+      main_characteristics: json['main_characteristics'] ?? '',
     );
   }
 }
