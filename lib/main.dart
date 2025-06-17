@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_marvel_app/Scenes/Home/home_factory.dart';
+import 'package:flutter_marvel_app/scenes/Home/home_factory.dart';
 
 void main() {
   runApp(const MainApp());

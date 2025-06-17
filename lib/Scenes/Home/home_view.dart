@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_marvel_app/Components/Header/header_view.dart';
-import 'package:flutter_marvel_app/Components/HeroCard/hero_card_view.dart';
-import 'package:flutter_marvel_app/Components/ItemsList/items_list_view.dart';
-import 'package:flutter_marvel_app/Models/CharacterModel.dart';
-import 'package:flutter_marvel_app/Repositories/HeroesRepository.dart';
-import 'package:flutter_marvel_app/Scenes/Error/error_factory.dart';
-import 'package:flutter_marvel_app/Scenes/HeroDetail/hero_detail_view.dart';
-import 'package:flutter_marvel_app/Scenes/Loading/loading_factory.dart';
+import 'package:flutter_marvel_app/components/Header/header_view.dart';
+import 'package:flutter_marvel_app/components/HeroCard/hero_card_view.dart';
+import 'package:flutter_marvel_app/components/ItemsList/items_list_view.dart';
+import 'package:flutter_marvel_app/models/hero_model.dart';
+import 'package:flutter_marvel_app/repositories/HeroesRepository.dart';
+import 'package:flutter_marvel_app/scenes/Error/error_factory.dart';
+import 'package:flutter_marvel_app/scenes/HeroDetail/hero_detail_view.dart';
+import 'package:flutter_marvel_app/scenes/Loading/loading_factory.dart';
 import 'package:flutter_marvel_app/Services/api_service.dart';
-import 'package:flutter_marvel_app/Components/BottomNavigationBar/bottom_navigation_bar.dart';
+import 'package:flutter_marvel_app/components/BottomNavigationBar/bottom_navigation_bar.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -21,9 +21,9 @@ class HomeViewState extends State<HomeView> {
   final HeroesRepository heroesRepository =
       HeroesRepository(apiService: ApiService());
 
-  List<CharacterModel> marvelCharacters = [];
-  List<CharacterModel> dcCharacters = [];
-  List<CharacterModel> animeCharacters = [];
+  List<HeroModel> marvelCharacters = [];
+  List<HeroModel> dcCharacters = [];
+  List<HeroModel> animeCharacters = [];
   bool isLoading = false;
   bool hasError = false;
 
@@ -44,10 +44,12 @@ class HomeViewState extends State<HomeView> {
       final allCharacters =
           await heroesRepository.fetchCharacters();
 
+      print(allCharacters);
+
       setState(() {
-        marvelCharacters.addAll((allCharacters?.marvel ?? []).cast<CharacterModel>());
-        dcCharacters.addAll((allCharacters?.dc ?? []).cast<CharacterModel>());
-        animeCharacters.addAll((allCharacters?.anime ?? []).cast<CharacterModel>());
+        marvelCharacters.addAll((allCharacters?.marvel ?? []).cast<HeroModel>());
+        dcCharacters.addAll((allCharacters?.dc ?? []).cast<HeroModel>());
+        animeCharacters.addAll((allCharacters?.anime ?? []).cast<HeroModel>());
       });
     } catch (e) {
       print(e);
@@ -110,9 +112,12 @@ class HomeViewState extends State<HomeView> {
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 48),
-                    ItemsListView<CharacterModel>(
+                    ItemsListView<HeroModel>(
                       label: "Personagens Marvel",
-                      items: marvelCharacters,
+                      // items: marvelCharacters,
+                      items: [
+                        HeroModel(id: 1, name: "Teste", description: "Description", image: "https://static.wikia.nocookie.net/anicrossbr/images/3/38/Ichigo_kurosaki_render_by_stella1994x-d7sx64g.png/revision/latest?cb=20151022032048&path-prefix=pt-br", mainCharacteristics: "teste")
+                      ],
                       itemBuilder: (context, character) {
                         return HeroCard(
                           heroName: character.name,

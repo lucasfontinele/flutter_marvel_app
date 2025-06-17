@@ -1,4 +1,4 @@
-import 'package:flutter_marvel_app/Scenes/Error/error_view.dart';
+import 'package:flutter_marvel_app/scenes/Error/error_view.dart';
 
 class ErrorFactory {
   static ErrorView createScreen() {
